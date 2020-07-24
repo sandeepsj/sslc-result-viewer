@@ -1,26 +1,65 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import StudentApp from "./components/studentWise/app";
+import SectionChooser from "./components/sectionChooser";
+import SchoolApp from "./components/schoolWise/app";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    selectedSection: "section2",
+  };
+  handleSectionChange = (sectionId) => {
+    //    console.log(this.state.selectedSection);
+    const newState = { ...this.state };
+    newState.selectedSection = sectionId;
+    this.setState(newState);
+  };
+
+  render() {
+    return (
+      <React.Fragment>
+        <div className="container-fluid">
+          <SectionChooser
+            onSectionChange={this.handleSectionChange}
+            selectedSection={this.state.selectedSection}
+          />
+        </div>
+        {this.getSection()}
+        <div className="container-fluid">
+          <footer
+            className="footer bg-dark"
+            style={{
+              padding: "10px 15px",
+              backgroundColor: "#f5f5f5",
+              borderTop: "1px solid #ddd",
+              borderRadius: 6,
+            }}
+          >
+            <div className="d-flex justify-content-center">
+              <span className="text-muted">Developed by Sandeep S J</span>
+            </div>
+          </footer>
+        </div>
+      </React.Fragment>
+    );
+  }
+
+  getSection = () => {
+    if (this.state.selectedSection === "section1") {
+      return (
+        <div>
+          <StudentApp />
+        </div>
+      );
+    }
+    if (this.state.selectedSection === "section2") {
+      return (
+        <div>
+          <SchoolApp />
+        </div>
+      );
+    }
+  };
 }
 
 export default App;
