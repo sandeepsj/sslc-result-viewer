@@ -17,7 +17,7 @@ class app extends Component {
     //   });
     console.log("updated and working till Here");
     var proxyUrl = "https://cors-anywhere.herokuapp.com/";
-    var targetUrl = `https://results.kite.kerala.gov.in/school_files/${schoolCode}.html`;
+    var targetUrl = `https://results.kite.kerala.gov.in:446/sslc/school_files/${schoolCode}.html`;
     console.log("STarted");
     fetch(proxyUrl + targetUrl)
       .then((res) => res.text())
